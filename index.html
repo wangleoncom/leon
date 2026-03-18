@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
+  <title>王岦恩個人網頁</title>
+  <meta name="description" content="15歲五專一年級全端開發者。精通Web/App開發，結合電機硬體思維與TikTok直播管理。" />
+  
+  <link rel="icon" href="icon.png" type="image/png" />
+  <meta property="og:image" content="og-image.jpg" />
+  <meta property="og:title" content="王岦恩" />
+  <meta property="og:type" content="website" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-theme">
+  <div class="top-progress-bar" id="top-progress-bar"></div>
+
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="mesh-gradient-bg parallax-bg" data-speed="0.05"></div>
+  <div class="noise-overlay"></div>
+  <div class="scanline-overlay"></div>
+
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <div class="progress-wrap interactive-btn" id="backToTop">
+    <svg class="progress-circle" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+    <i class="fa-solid fa-arrow-up progress-arrow"></i>
+  </div>
+
+  <header class="floating-header" id="top">
+    <div class="nav-container glass-effect magnetic-wrap">
+    <a href="#hero" class="brand interactive-btn magnetic">
+      <img src="icon.png" alt="Leon Wang Logo" class="brand-icon">
+      <span class="brand-text">LEON.W</span>
+    </a>
+      <nav class="desktop-nav">
+        <a href="#expertise" class="nav-link interactive-btn" data-i18n="workscopeTitle">我的專業與角色</a>
+        <a href="#philosophy" class="nav-link interactive-btn" data-i18n="philosophyTitle">我的性格</a>
+        <a href="#projects" class="nav-link interactive-btn" data-i18n="projectsTitle">我開發的專案</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-btn interactive-btn magnetic" id="themeToggle" aria-label="切換深淺色主題"><i class="fa-solid fa-moon"></i></button>
+        <button class="lang-btn interactive-btn magnetic" id="langToggle">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+    <section class="hero-section" id="hero">
+      <div class="container hero-layout">
+        <div class="hero-content relative-box parallax-item" data-speed="0.1">
+          <div class="hero-orbit-deco float-anim">
+            <div class="orbit-path"></div>
+            <div class="orbit-planet"></div>
+          </div>
+
+          <div class="eyebrow-badge reveal-up scale-in">
+            <i class="fa-solid fa-terminal"></i>
+            <span class="hacker-text" data-original="15 y/o Developer × Live Ops">15歲工程師 × 直播管理員</span>
+          </div>
+          
+          <h1 class="hero-title mask-reveal-title">
+            <span class="mask-line"><span class="mask-content gradient-text-anim fix-clip" data-i18n="heroName">王岦恩</span></span>
+          </h1>
+          
+          <h2 class="hero-subtitle">
+            <span id="hero-typewriter" class="typewriter-text" data-i18n="heroRole"></span>
+          </h2>
+          
+          <p class="hero-description reveal-up delay-3" data-i18n="heroDesc">
+            「你們負責開心的開直播、看直播，剩下的麻煩事交給我。」<br>目前就讀五專一年級。不只鑽研 C/C++ 與全端開發，我更在乎螢幕另一端的使用者體驗。用程式碼解決問題，用同理心守護社群溫度。
+          </p>
+
+          <div class="hero-cta-group reveal-up delay-4 scale-in">
+            <a href="#projects" class="btn btn-glow interactive-btn magnetic">
+              <span data-i18n="navCta">探索個人程式專案</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-right delay-2 parallax-item glow-card" data-speed="-0.05">
+          <div class="bento-card visual-card" id="code-terminal">
+            <div class="card-header">
+              <div class="mac-dots"><span></span><span></span><span></span></div>
+              <span class="card-label hacker-text" data-original="sys.profile_init">sys.profile_init</span>
+            </div>
+            <div class="code-block">
+              <p class="code-line-anim"><span class="code-keyword">const</span> <span class="code-var">leon</span> = {</p>
+              <p class="indent-1 code-line-anim"><span class="code-key">age</span>: <span class="code-boolean">15</span>,</p>
+              <p class="indent-1 code-line-anim"><span class="code-key">education</span>: <span class="code-string" data-i18n="codeEdu">"五專一年級"</span>,</p>
+              <p class="indent-1 code-line-anim"><span class="code-key">EE_Background</span>: <span class="code-boolean">true</span>, <span class="code-comment" data-i18n="codeEe"></span></p>
+              <p class="indent-1 code-line-anim"><span class="code-key">stack</span>: [<span class="code-string">"C/C++"</span>, <span class="code-string">"Python"</span>, <span class="code-string">"Web/App"</span>],</p>
+              <p class="indent-1 code-line-anim"><span class="code-key">EE_Background</span>: <span class="code-boolean">true</span>, <span class="code-comment" data-i18n="codeEe"></span></p>
+              <p class="indent-1 code-line-anim"><span class="code-key">personality</span>: <span class="code-string" data-i18n="codePers">"脾氣很好，說到做到"</span>,</p>
+              <p class="code-line-anim">}<span class="code-caret"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-marquee-section" id="skills">
+      <div class="marquee-container">
+        <div class="marquee-track" id="velocity-marquee">
+          <div class="marquee-content">
+            <span><i class="fa-solid fa-c"></i> C / C++</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-python"></i> Python</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-html5"></i> Web Dev</span><span class="separator">✦</span>
+            <span><i class="fa-solid fa-mobile-screen"></i> App 開發</span><span class="separator">✦</span>
+            <span><i class="fa-solid fa-shield-heart"></i> 社群守護</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-tiktok"></i> TikTok 管理</span><span class="separator">✦</span>
+          </div>
+          <div class="marquee-content">
+            <span><i class="fa-solid fa-c"></i> C / C++</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-python"></i> Python</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-html5"></i> Web Dev</span><span class="separator">✦</span>
+            <span><i class="fa-solid fa-mobile-screen"></i> App 開發</span><span class="separator">✦</span>
+            <span><i class="fa-solid fa-shield-heart"></i> 社群守護</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-tiktok"></i> TikTok 管理</span><span class="separator">✦</span>
+          </div>
+          <div class="marquee-content">
+            <span><i class="fa-solid fa-c"></i> C / C++</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-python"></i> Python</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-html5"></i> Web Dev</span><span class="separator">✦</span>
+            <span><i class="fa-solid fa-mobile-screen"></i> App 開發</span><span class="separator">✦</span>
+            <span><i class="fa-solid fa-shield-heart"></i> 社群守護</span><span class="separator">✦</span>
+            <span><i class="fa-brands fa-tiktok"></i> TikTok 管理</span><span class="separator">✦</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bento-section" id="expertise">
+      <div class="container">
+        <div class="section-header reveal-up scale-in">
+          <span class="section-mono hacker-text" data-original="/ SKILLS & ROLES">/ SKILLS & ROLES</span>
+          <h2 class="section-title" data-i18n="workscopeTitle">專業與角色</h2>
+        </div>
+
+        <div class="bento-grid">
+          <article class="bento-card span-2 glow-card reveal-up parallax-item" data-speed="0.03">
+            <div class="icon-and-title">
+              <div class="card-icon float-anim"><i class="fa-solid fa-layer-group"></i></div>
+              <h3 data-i18n="barDynamic">全端網頁與 App 開發</h3>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-inner">
+                <p data-i18n="aboutCard1Text">具備從底層邏輯到前端介面的開發能力，涵蓋靜態網站、動態後台以及客製化 App。結合電機科的硬體思維，寫出高穩定性的架構。</p>
+                <div class="tag-cloud mt-4">
+                  <span>C/C++</span><span>Python</span><span>App Dev</span><span>Web UI/UX</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="bento-card glow-card reveal-left delay-1">
+            <div class="icon-and-title">
+              <div class="card-icon float-anim" style="animation-delay: 0.5s;"><i class="fa-solid fa-mobile-screen-button"></i></div>
+              <h3 data-i18n="feat1Title">RWD響應式適配</h3>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-inner">
+                <p data-i18n="feat1Text">完美適配手機、平板與桌機各種螢幕尺寸，提供流暢的跨裝置體驗。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bento-card glow-card reveal-right delay-2">
+            <div class="icon-and-title">
+              <div class="card-icon float-anim" style="animation-delay: 1s;"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+              <h3 data-i18n="feat2Title">SEO搜尋引擎優化</h3>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-inner">
+                <p data-i18n="feat2Text">底層代碼結構優化，提升搜尋引擎友善度，讓網站能夠獲得更高自然曝光。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bento-card glow-card reveal-up delay-3">
+            <div class="icon-and-title">
+              <div class="card-icon float-anim" style="animation-delay: 1.5s;"><i class="fa-solid fa-user-shield"></i></div>
+              <h3 data-i18n="barLive">直播聊天室管理</h3>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-inner">
+                <p data-i18n="scope1Text">「遇到黑粉、機器人、刷留言帳號」第一時間禁言處理，維持聊天室品質。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bento-card glow-card reveal-up delay-1 parallax-item" data-speed="-0.02">
+            <div class="icon-and-title">
+              <div class="card-icon float-anim"><i class="fa-solid fa-video"></i></div>
+              <h3 data-i18n="scope5Title">盜片檢舉與精華紀錄</h3>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-inner">
+                <p data-i18n="scope5Text">偵測並處理未經授權的搬運影片。同時協助粉絲記錄直播精華照片，保留美好回憶。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bento-card glow-card reveal-up delay-2">
+            <div class="icon-and-title">
+              <div class="card-icon float-anim" style="animation-duration: 6s;"><i class="fa-solid fa-hand-holding-heart"></i></div>
+              <h3 data-i18n="dataTitle">社群應援與陪伴</h3>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-inner">
+                <p data-i18n="dataText">「每一份心意都值得被看見。」積極按讚、留言粉絲的創作。</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="philosophy-section" id="philosophy">
+      <div class="container">
+        <div class="terminal-window reveal-up parallax-item glow-card" data-speed="0.04">
+          <div class="terminal-header">
+            <div class="mac-dots"><span></span><span></span><span></span></div>
+            <span class="terminal-title">leon_wang@system: ~/personality</span>
+          </div>
+          <div class="terminal-body">
+            <p class="typewriter-line delay-1"><span class="cmd-prompt">$</span> <span data-i18n="phil1">cat about_me.txt</span></p>
+            <p class="cmd-output reveal-up delay-2">> <strong>Cold mind, Warm heart.</strong><br><span data-i18n="philDesc1">我的MBTI是ISTP，我能夠快速處理 Bug 和黑粉，冰冷的代碼背後是真實的人群。不論是寫程式還是管理直播，我都致力於打造使用者的體驗。</span></p>
+            <p class="typewriter-line delay-3 mt-4"><span class="cmd-prompt">$</span> <span class="blink-cursor">_</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="section-header mask-reveal-title">
+          <span class="mask-line"><span class="mask-content section-mono hacker-text" data-original="/ LARGE_PROJECTS">/ LARGE_PROJECTS</span></span>
+          <h2 class="mask-line"><span class="mask-content section-title" data-i18n="projectsTitle">我的專案</span></h2>
+        </div>
+
+        <div class="project-showcase">
+          <div class="project-row reveal-left">
+            <div class="project-info">
+              <span class="project-number hacker-text" data-original="01">01</span>
+              <h3 data-i18n="project1Title">老王的粉絲網站</h3>
+              <p data-i18n="project1Text">完整的互動網頁，包含登入、排行榜、AI 助手與Q&A問答資料庫。</p>
+              <div class="project-tags"><span data-i18n="projectType1">動態資料庫網頁</span><span>UI/UX</span></div>
+              <a href="project-laowang.html" class="btn btn-outline interactive-btn magnetic mt-4" data-i18n="projectBtn">查看專案詳情 &rarr;</a>
+            </div>
+            
+            <div class="project-visual-wrapper">
+              <div class="mac-mockup glow-pulse tilt-effect">
+                <div class="mac-header"><div class="mac-dots"><span></span><span></span><span></span></div></div>
+                <div class="mac-body">
+                  <div class="glare-layer"></div>
+                  <img src="zcsn.png" alt="老王專屬網站" class="mockup-img">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-row reverse reveal-right">
+            <div class="project-info">
+              <span class="project-number hacker-text" data-original="02">02</span>
+              <h3 data-i18n="project2Title">鹿🦌的粉絲網站</h3>
+              <p data-i18n="project2Text">個人Q&A資訊站、粉絲認證卡，整體接近 App 化沉浸體驗。</p>
+              <div class="project-tags"><span data-i18n="projectType2">專業設計</span><span>PWA</span></div>
+              <a href="project-deer.html" class="btn btn-outline interactive-btn magnetic mt-4" data-i18n="projectBtn">查看專案詳情 &rarr;</a>
+            </div>
+            
+            <div class="project-visual-wrapper">
+              <div class="mobile-mockup glow-pulse tilt-effect">
+                <div class="mobile-notch"></div>
+                <div class="mobile-body">
+                  <div class="glare-layer"></div>
+                  <img src="ld.png" alt="鹿粉絲網站" class="mockup-img">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-row reveal-left">
+            <div class="project-info">
+              <span class="project-number hacker-text" data-original="03">03</span>
+              <h3 data-i18n="project3Title">澎湖科技大學 USR 計畫</h3>
+              <p data-i18n="project3Text">湖東村 USR 專案，結合在地資訊、訪談內容與視覺展示，持續開發與優化中的大型資訊網站。</p>
+              <div class="project-tags"><span data-i18n="projectType3">資訊架構 / 開發</span></div>
+              <button class="btn btn-outline interactive-btn magnetic mt-4 locked-btn">
+                <i class="fa-solid fa-lock"></i> <span data-i18n="devStatus">專案開發中</span>
+              </button>
+            </div>
+            
+            <div class="project-visual-wrapper">
+              <div class="mac-mockup project-locked-container tilt-effect">
+                <div class="mac-header"><div class="mac-dots"><span></span><span></span><span></span></div></div>
+                <div class="mac-body">
+                  <div class="glare-layer"></div>
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="USR Project" class="mockup-img" style="filter: blur(5px);">
+                  <div class="lock-overlay">
+                    <i class="fa-solid fa-lock overlay-icon float-anim"></i>
+                    <span class="hacker-text" data-original="IN DEVELOPMENT">IN DEVELOPMENT</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mini-projects-section" id="mini-projects">
+      <div class="container">
+        <div class="section-header reveal-up scale-in">
+          <span class="section-mono hacker-text" data-original="/ MINI_TOOLS & UTILS">/ MINI_TOOLS & UTILS</span>
+          <h2 class="section-title" data-i18n="miniTitle">實用工具與小型專案</h2>
+        </div>
+        <div class="mini-projects-grid">
+          <a href="https://tool-umber-kappa.vercel.app/livestream-calculator.html" class="mini-project-card glow-card tilt-effect reveal-up interactive-btn">
+            <div class="mini-card-header">
+              <i class="fa-solid fa-calculator mini-icon"></i>
+              <i class="fa-solid fa-arrow-right mini-arrow"></i>
+            </div>
+            <h4 data-i18n="mini1Title">直播數據計算機</h4>
+            <p data-i18n="mini1Text">透過簡單的輸入，快速換算 TikTok 鑽石收益與預估流量。</p>
+            <div class="mini-tags"><span>JavaScript</span><span>Utility</span></div>
+          </a>
+
+          <a href="https://tool-umber-kappa.vercel.app/pomodoro-focus.html" class="mini-project-card glow-card tilt-effect reveal-up delay-1 interactive-btn">
+            <div class="mini-card-header">
+              <i class="fa-solid fa-clock mini-icon"></i>
+              <i class="fa-solid fa-arrow-right mini-arrow"></i>
+            </div>
+            <h4 data-i18n="mini2Title">番茄鐘專注工具</h4>
+            <p data-i18n="mini2Text">一個簡潔的 PWA 番茄鐘，幫助我在寫程式與讀書時保持專注。</p>
+            <div class="mini-tags"><span>Vue.js</span><span>PWA</span></div>
+          </a>
+
+          <a href="https://tool-umber-kappa.vercel.app/terminal-theme.html" class="mini-project-card glow-card tilt-effect reveal-up delay-2 interactive-btn">
+            <div class="mini-card-header">
+              <i class="fa-solid fa-terminal mini-icon"></i>
+              <i class="fa-solid fa-arrow-right mini-arrow"></i>
+            </div>
+            <h4 data-i18n="mini3Title">自定義終端機主題</h4>
+            <p data-i18n="mini3Text">分享我個人使用的 Mac Terminal / ZSH 高亮配色檔與腳本。</p>
+            <div class="mini-tags"><span>Shell</span><span>Open Source</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-section" id="proof">
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric-item reveal-up scale-in">
+            <h4 class="metric-value"><span class="counter" data-target="2">0</span>+</h4>
+            <p class="metric-label" data-i18n="proofLabel1">支援直播帳號</p>
+          </div>
+          <div class="metric-item reveal-up delay-1 scale-in">
+            <h4 class="metric-value"><span class="counter" data-target="100">0</span>%</h4>
+            <p class="metric-label" data-i18n="proofLabel2">問題處理執行力</p>
+          </div>
+          <div class="metric-item reveal-up delay-2 scale-in">
+            <h4 class="metric-value"><span class="counter" data-target="5">0</span>+</h4>
+            <p class="metric-label" data-i18n="proofLabel3">成功協助下架侵權帳號</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-left reveal-left">
+        <h2 class="footer-logo hacker-text" data-original="LEON.W">LEON.W</h2>
+        <p data-i18n="collabText">不論是需要個人網站開發、技術討論，還是直播間需要一個冷靜可靠的管理員，歡迎找我聊聊。</p>
+      </div>
+      
+      <div class="social-links reveal-right">
+        <a href="mailto:wangleon26@icloud.com" aria-label="寄送電子郵件給我" class="social-btn email-btn interactive-btn magnetic"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.tiktok.com/@ld_leon0803" target="_blank" rel="noopener noreferrer" class="social-btn tiktok-btn interactive-btn magnetic"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/ld_leon0803/" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn interactive-btn magnetic"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="container copyright-bar reveal-up">
+      <p>© <span id="year"></span> <span data-i18n="footerName">王岦恩</span>. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

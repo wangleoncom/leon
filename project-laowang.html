@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
+  <title>老王專屬網站 - 專案詳細解析 | Leon Wang</title>
+  <meta name="description" content="深入了解 Leon Wang 為頂尖主播老王打造的高級粉絲互動管理系統與後台支援中心。" />
+  
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-theme">
+  <div class="top-progress-bar" id="top-progress-bar"></div>
+
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="mesh-gradient-bg parallax-bg" data-speed="0.05"></div>
+  <div class="noise-overlay"></div>
+  <div class="scanline-overlay"></div>
+
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <div class="progress-wrap interactive-btn" id="backToTop">
+    <svg class="progress-circle" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+    <i class="fa-solid fa-arrow-up progress-arrow"></i>
+  </div>
+
+  <header class="floating-header">
+    <div class="nav-container glass-effect magnetic-wrap">
+      <a href="index.html#hero" class="brand interactive-btn magnetic">
+        <span class="status-indicator"></span>
+        <span class="brand-text">LEON.W</span>
+      </a>
+      <nav class="desktop-nav">
+        <a href="index.html#expertise" class="nav-link interactive-btn" data-i18n="workscopeTitle">專業與角色</a>
+        <a href="index.html#projects" class="nav-link interactive-btn" data-i18n="backToProjects">返回作品集</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-btn interactive-btn magnetic" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+        <button class="lang-btn interactive-btn magnetic" id="langToggle">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 150px; padding-bottom: 100px;">
+    
+    <section class="project-hero reveal-up">
+      <div class="eyebrow-badge">
+        <i class="fa-solid fa-rocket"></i>
+        <span class="hacker-text" data-original="PROJECT_ID: LAO_WANG_V2">PROJECT_ID: LAO_WANG_V2</span>
+      </div>
+      <h1 class="hero-title mask-reveal-title">
+        <span class="mask-line"><span class="mask-content gradient-text-anim" data-i18n="lwTitle">老王專屬網站</span></span>
+      </h1>
+      <p class="hero-description" style="max-width: 850px;" data-i18n="lwHeroDesc">
+        這是一個打破傳統框架的粉絲管理系統。透過自研的儀表板與後台客服架構，我們將單純的Q&A資料庫升級為具備成長感、互動感與安全感的全方位數位平台。
+      </p>
+    </section>
+
+    <div class="project-visual-wrapper reveal-up delay-1" style="margin: 60px 0;">
+      <div class="mac-mockup glow-pulse tilt-effect" style="max-width: 1000px;">
+        <div class="mac-header"><div class="mac-dots"><span></span><span></span><span></span></div></div>
+        <div class="mac-body">
+          <div class="glare-layer"></div>
+          <img src="zcsn.png" alt="老王專屬網站儀表板" class="mockup-img">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header reveal-up">
+      <span class="section-mono">/ CORE_SYSTEM</span>
+      <h2 class="section-title">核心系統架構</h2>
+    </div>
+
+    <div class="bento-grid">
+      <article class="bento-card glow-card reveal-up">
+        <div class="icon-and-title">
+          <div class="card-icon"><i class="fa-solid fa-id-card"></i></div>
+          <h3>正式粉絲認證系統</h3>
+        </div>
+        <div class="reveal-content">
+          <div class="reveal-inner">
+            <p>透過程式碼渲染，建立屬於老王的粉絲獨有的粉絲認證卡。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="bento-card glow-card reveal-up delay-1">
+        <div class="icon-and-title">
+          <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>EXP 成長機制</h3>
+        </div>
+        <div class="reveal-content">
+          <div class="reveal-inner">
+            <p>遊戲化的等級系統。透過互動累積經驗值，視覺化展示粉絲對於網站的活躍程度。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="bento-card glow-card reveal-up delay-2">
+        <div class="icon-and-title">
+          <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+          <h3>即時動態公告</h3>
+        </div>
+        <div class="reveal-content">
+          <div class="reveal-inner">
+            <p>集中管理直播資訊、活動預告與重要通知，確保粉絲能第一時間獲取最正確的訊息。</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <section class="support-section reveal-up" style="margin-top: 120px;">
+      <div class="hero-layout" style="grid-template-columns: 1fr 1fr; gap: 60px;">
+        <div class="support-content">
+          <span class="section-mono">/ SUPPORT_CENTER</span>
+          <h2 class="hero-title" style="font-size: 2.5rem; margin: 10px 0;">後台工程師支援中心</h2>
+          <p class="hero-description">
+            我們打造了專業的客服對話介面。當系統出現問題或粉絲遇到困難時，能透過加密的對話管道直接與工程師聯絡。並且支援圖片上傳，讓工程師能夠更快速定位錯誤並修正、發佈更新包。
+          </p>
+          <div class="tag-cloud">
+            <span>加密通訊</span><span>問題追蹤</span><span>圖片上傳</span>
+          </div>
+        </div>
+        
+        <div class="project-visual-wrapper">
+          <div class="mobile-mockup glow-pulse tilt-effect" style="max-width: 320px;">
+            <div class="mobile-notch"></div>
+            <div class="mobile-body">
+              <div class="glare-layer"></div>
+              <img src="image_b0f585.png" alt="粉絲客服介面" class="mockup-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="changelog-section" style="margin-top: 120px;">
+      <div class="section-header reveal-up">
+        <span class="section-mono">/ GROWTH_LOG</span>
+        <h2 class="section-title">專案成長日誌</h2>
+      </div>
+
+      <div class="terminal-window reveal-up">
+        <div class="terminal-header">
+          <div class="mac-dots"><span></span><span></span><span></span></div>
+          <span class="terminal-title">laowang_project_log.txt</span>
+        </div>
+        <div class="terminal-body">
+          <p class="cmd-output">> <strong>2026-03-15（v24.1.7）</strong><br>
+          核心：重構客服系統，斷開連線時自動抹除本地快取，落實資安防護。<br>
+          修復：排行榜不再顯示「尚未登入」，解決渲染同步延遲問題。<br>
+          修復：首頁版面結構錯誤，各分頁內容不再互相干擾重疊。<br>
+          優化：官方客服中心即使被工程師結案，依舊可發送新訊息。<br>
+          新增：顯示 Twitch 訂閱者專屬認證徽章。<br>
+          新增：管理員直播照區塊。<br>
+          新增：顯示 Twitch 直播區。</p>
+          <p class="typewriter-line"><span class="cmd-prompt">$</span> <span class="blink-cursor">_</span></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-cta-group reveal-up" style="margin-top: 100px; justify-content: center;">
+      <a href="index.html#projects" class="btn btn-outline interactive-btn magnetic">
+        <i class="fa-solid fa-chevron-left" style="margin-right: 10px;"></i>
+        <span>回到作品集</span>
+      </a>
+      <a href="https://wangleoncom.github.io/_z_.csn/" target="_blank" class="btn btn-glow interactive-btn magnetic">
+        <span>進入老王基地</span>
+        <i class="fa-solid fa-external-link" style="margin-left: 10px;"></i>
+      </a>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
