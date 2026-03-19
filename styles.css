@@ -525,6 +525,7 @@ body.light-theme .filter-btn.active { background: var(--accent-primary); color: 
 }
 
 @media (max-width: 768px) {
+  /* -- 原本的設定 -- */
   .desktop-nav { display: none; }
   .project-row, .project-row.reverse { flex-direction: column; gap: 32px; margin-bottom: 80px; }
   .project-visual-wrapper { width: 100%; flex: none; }
@@ -537,8 +538,13 @@ body.light-theme .filter-btn.active { background: var(--accent-primary); color: 
   .progress-arrow { font-size: 16px; }
   .tilt-effect { transform: none !important; transition: none !important; }
   .magnetic { transform: none !important; }
-  
-  /* Mobile Lightbox Tweaks */
   .lightbox-close { top: -45px; right: -10px; font-size: 1.8rem; }
   .lightbox-content { max-width: 95vw; }
+  
+  /* -- 新增的優化設定 (合併進來) -- */
+  .bento-card { min-height: auto !important; padding: 24px !important; }
+  .bento-card .icon-and-title { transform: none !important; }
+  .marquee-content span { font-size: 1.1rem !important; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+  body { cursor: auto !important; }
 }

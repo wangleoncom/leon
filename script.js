@@ -78,7 +78,20 @@ const translations = {
     proofLabel2: "問題處理執行力",
     proofLabel3: "協助下架侵權帳號",
     collabText: "不論是需要個人網站開發、技術討論，還是直播間需要一個冷靜可靠的管理員，歡迎找我聊聊。",
-    footerName: "王岦恩"
+    footerName: "王岦恩",
+    liveOpsComment: "// 管理直播間",
+    filterAll: "全部作品",
+    filterWeb: "網頁開發",
+    filterLive: "直播 / 社群營運",
+    filterTools: "實用小工具箱 🛠️",
+    
+    // --- 跑馬燈 (Marquee) ---
+    mqC: "C / C++",
+    mqPy: "Python",
+    mqWeb: "Web Dev",
+    mqApp: "App 開發",
+    mqShield: "社群守護",
+    mqTikTok: "TikTok 管理",
   },
   en: {
     // --- Navigation & General ---
@@ -90,7 +103,7 @@ const translations = {
     heroName: "Leon Wang",
     heroRole: "15 y/o Developer × Live Ops Manager",
     heroDesc: "\You focus on the joy of streaming; I'll handle the rest.\"<br>Currently a **first-year junior college student** (High School Freshman level). Beyond C/C++ and full-stack development, I prioritize the user experience on the other side of the screen. Solving problems with code, protecting the community vibe with empathy.",
-    codeEdu: "\"EE Background\"",
+    codeEdu: "\"A+ Background\"",
     codePers: "\"Good temper, keeps promises\"",
 
     // --- Expertise & Roles ---
@@ -139,9 +152,27 @@ const translations = {
     proofLabel2: "Issue Resolution Rate",
     proofLabel3: "Copyright Takedowns",
     collabText: "Whether you need personal website development, technical discussions, or a calm and reliable moderator for your stream, feel free to reach out.",
-    footerName: "Leon Wang"
+    footerName: "Leon Wang",
+    liveOpsComment: "// Live Stream Management",
+    filterAll: "All Projects",
+    filterWeb: "Web Dev",
+    filterLive: "Live / Community Ops",
+    filterTools: "Mini Utility Box 🛠️",
+
+    // --- 跑馬燈 (Marquee) ---
+    mqC: "C / C++",
+    mqPy: "Python",
+    mqWeb: "Web Dev",
+    mqApp: "App Dev",
+    mqShield: "Community Shield",
+    mqTikTok: "TikTok Ops",
   }
 };
+let activeParticleColor = "rgba(100, 150, 255, 0.4)"; // 預設顏色
+
+function updateParticleColor() {
+  activeParticleColor = getCSSVariable('--particle-color');
+}
 
 // ==========================================
 // 2. 實用工具函式 (Utility Functions)
@@ -203,28 +234,53 @@ document.addEventListener("DOMContentLoaded", () => {
     themeIcon?.classList.replace("fa-moon", "fa-sun");
   }
 
-  themeToggle?.addEventListener("click", () => {
-    // 加入微互動：縮放彈跳感
-    themeToggle.style.transform = "scale(0.8)";
+
+// --- B. 主題切換 (Theme Toggle) 修正版 ---
+themeToggle?.addEventListener("click", () => {
+  themeToggle.style.transform = "scale(0.8)";
+  
+  setTimeout(() => {
+    document.body.classList.toggle("light-theme");
+    const isLight = document.body.classList.contains("light-theme");
     
-    setTimeout(() => {
-      document.body.classList.toggle("light-theme");
-      const isLight = document.body.classList.contains("light-theme");
-      
-      if (isLight) {
-        themeIcon?.classList.replace("fa-moon", "fa-sun");
-        localStorage.setItem("theme", "light");
+    if (isLight) {
+      themeIcon?.classList.replace("fa-moon", "fa-sun");
+      localStorage.setItem("theme", "light");
+    } else {
+      themeIcon?.classList.replace("fa-sun", "fa-moon");
+      localStorage.setItem("theme", "dark");
+    }
+    
+    updateParticleColor(); 
+    themeToggle.style.transform = ""; 
+  }, 100); 
+}); // <-- 原本少了這個閉合
+
+// --- C. 雙語系統切換 (i18n) 修正版 ---
+function applyTranslations(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang === "tw" ? "zh-Hant" : "en";
+  localStorage.setItem("preferredLang", lang);
+
+  clearTimeout(typeTimeout); 
+
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.dataset.i18n;
+    if (translations[lang] && translations[lang][key]) {
+      if (el.id === 'hero-typewriter') {
+        typeWriterEffect(el, translations[lang][key], 50);
       } else {
-        themeIcon?.classList.replace("fa-sun", "fa-moon");
-        localStorage.setItem("theme", "dark");
+        el.innerHTML = translations[lang][key]; 
       }
-      
-      // 恢復縮放
-      themeToggle.style.transform = ""; 
-    }, 100); // 配合 CSS transition
+    }
   });
 
-  // --- C. 雙語系統切換 (i18n Toggle) ---
+  // 更新按鈕文字
+  if (langToggle) langToggle.textContent = lang === "tw" ? "EN" : "TW";
+} // <-- 原本少了這個閉合
+
+
+// --- C. 雙語系統切換 (i18n) ---
   const langToggle = document.getElementById("langToggle");
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -232,12 +288,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyTranslations(lang) {
     currentLang = lang;
     document.documentElement.lang = lang === "tw" ? "zh-Hant" : "en";
-    
-    // 遍歷所有帶有 data-i18n 屬性的元素並替換文字
+    localStorage.setItem("preferredLang", lang); // 記住使用者選擇
+
+    clearTimeout(typeTimeout); // 停止當前正在跑的打字機，避免文字重疊
+
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.dataset.i18n;
       if (translations[lang] && translations[lang][key]) {
-        // Hero 區塊的職業文字保留打字機特效
         if (el.id === 'hero-typewriter') {
           typeWriterEffect(el, translations[lang][key], 50);
         } else {
@@ -245,17 +302,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     });
-    
-    // 切換按鈕文字顯示 (如果現在是TW，按鈕顯示EN)
+
+    // 切換按鈕文字顯示
     if (langToggle) langToggle.textContent = lang === "tw" ? "EN" : "TW";
   }
 
+  // 立即執行判斷，初始化語言 (從 localStorage 讀取，沒有則預設 tw)
+  const savedLang = localStorage.getItem("preferredLang") || "tw";
+  applyTranslations(savedLang);
+
+  // 切換按鈕點擊事件
   langToggle?.addEventListener("click", () => {
     applyTranslations(currentLang === "tw" ? "en" : "tw");
   });
-  
-  // 初始執行一次翻譯綁定
-  applyTranslations(currentLang);
 
   // --- D. 滾動進度條與 Back To Top ---
   const progressPath = document.querySelector('.progress-circle path');
@@ -627,10 +686,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }));
     }
     
-    function drawCanvas() {
-      ctx.clearRect(0, 0, width, height);
-      // 動態抓取 CSS 變數，完美適配深淺色模式
-      const pColor = getCSSVariable('--particle-color');
+   function drawCanvas() {
+    ctx.clearRect(0, 0, width, height);
+      const pColor = activeParticleColor; 
       
       for (const p of particles) {
         p.x += p.vx; p.y += p.vy;
